@@ -20,4 +20,4 @@ jobs:
 
     - name: Deploy to S3
       run: |
-        aws s3 sync . s3://your-bucket-name --delete --exclude "*" --include "*.html" --include "*.css" --include "*.js"
+        aws s3 sync . s3://elle.lgbt --delete --exclude "*" --include "*.html" --include "*.css" --include "*.js"
