@@ -3,21 +3,37 @@ name: Deploy to S3
 on:
   push:
     branches:
-      - main  # or your default branch name
+      - main # or your default branch name
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 
-    - name: Configure AWS credentials
-      uses: aws-actions/configure-aws-credentials@v1
-      with:
-        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: us-west-1
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-west-1
 
-    - name: Deploy to S3
-      run: |
-        aws s3 sync . s3://elle.lgbt --delete --exclude "*" --include "*.html" --include "*.css" --include "*.js"
+      - name: Deploy to S3
+        run: |
+          # Upload HTML files without extension from deploy/ directory
+          find deploy/ -name "*.html" -type f | while read file; do
+            filename=$(basename "$file" .html)
+            relative_path=$(dirname "${file#deploy/}")
+            if [ "$relative_path" = "." ]; then
+              aws s3 cp "$file" "s3://elle.lgbt/$filename" --content-type "text/html" --content-disposition "inline"
+            else
+              aws s3 cp "$file" "s3://elle.lgbt/$relative_path/$filename" --content-type "text/html" --content-disposition "inline"
+            fi
+          done
+
+          # Upload CSS and JS files from deploy/ directory
+          aws s3 sync deploy/ s3://elle.lgbt --delete --exclude "*" --include "*.css" --include "*.js"
+
+          # Set correct content-type headers for CSS and JS files
+          aws s3 cp s3://elle.lgbt s3://elle.lgbt --recursive --exclude "*" --include "*.css" --content-type "text/css"
+          aws s3 cp s3://elle.lgbt s3://elle.lgbt --recursive --exclude "*" --include "*.js" --content-type "application/javascript"
