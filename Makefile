@@ -1,10 +1,19 @@
 
-all: index.html
+# Find all Markdown files in the current directory
+MD_FILES := $(wildcard *.md)
 
-clean:
-	rm -f index.html
+# Create a list of target HTML files
+HTML_FILES := $(MD_FILES:.md=.html)
 
-index.html: index.md template.html Makefile
+# Default target
+all: $(HTML_FILES)
+
+# Rule to build HTML files from Markdown
+%.html: %.md index.css template.html Makefile
 	pandoc --toc -s --css reset.css --css index.css -i $< -o $@ --template=template.html
+
+# Clean target
+clean:
+	rm -f $(HTML_FILES)
 
 .PHONY: all clean

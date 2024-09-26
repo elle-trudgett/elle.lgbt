@@ -4,10 +4,12 @@
   --font-family: "JetBrains Mono", monospace;
   --line-height: 1.20rem;
   --border-thickness: 2px;
-  --text-color: #000;
-  --text-color-alt: #666;
-  --background-color: #fff;
-  --background-color-alt: #eee;
+  --text-color: #28251c;
+  --text-color-alt: #747266;
+  --link-color: #66645a;
+  --accent-color: #e150a1;
+  --background-color: #f5f3f0;
+  --background-color-alt: #f2f1ea;
 
   --font-weight-normal: 500;
   --font-weight-medium: 600;
@@ -23,10 +25,12 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --text-color: #fff;
-    --text-color-alt: #aaa;
-    --background-color: #000;
-    --background-color-alt: #111;
+    --text-color: #f4f4ef;
+    --text-color-alt: #a09999;
+    --link-color: #b8b6aa;
+    --accent-color: #ee54aa;
+    --background-color: #2e2e2b;
+    --background-color-alt: #30302e;
   }
 }
 
@@ -110,7 +114,7 @@ a {
 }
 
 a:link, a:visited {
-  color: var(--text-color);
+  color: var(--link-color);
 }
 
 p {
@@ -119,6 +123,7 @@ p {
 
 strong {
   font-weight: var(--font-weight-bold);
+  color: var(--accent-color);
 }
 em {
   font-style: italic;
@@ -298,10 +303,12 @@ input, button, textarea {
     calc(var(--line-height) / 2 - var(--border-thickness))
     calc(1ch - var(--border-thickness));
   margin: 0;
+  margin-bottom: 1rem;
   font: inherit;
+  font-size: 2rem;
   font-weight: inherit;
-  height: calc(var(--line-height) * 2);
-  width: auto;
+  height: calc(var(--line-height) * 4);
+  width: 100%;
   overflow: visible;
   background: var(--background-color);
   color: var(--text-color);
