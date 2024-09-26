@@ -2,7 +2,7 @@
 title: elle.lgbt
 subtitle: story of my **life**
 author: Elle Trudgett
-date: 2024-09-25
+date: ;modified_date;
 lang: en
 toc: true
 toc-title: Contents

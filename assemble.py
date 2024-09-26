@@ -10,15 +10,14 @@ def get_modified_date(file_path):
 
 
 def assemble():
-    for fn in glob.glob("*.md"):
-        print(fn)
+    for fn in glob.glob("*.html"):
         with open(fn, "r") as f:
             lines = f.readlines()
 
         m_date = get_modified_date(fn)
 
         lines = [
-            line.replace("{modified_date}", m_date)
+            line.replace(";modified_date;", m_date)
             for line in lines
         ]
 

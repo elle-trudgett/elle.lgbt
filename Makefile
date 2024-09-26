@@ -7,6 +7,7 @@ HTML_FILES := $(MD_FILES:.md=.html)
 
 # Default target
 all: $(HTML_FILES)
+	python assemble.py
 
 # Rule to build HTML files from Markdown
 %.html: %.md index.css template.html Makefile
