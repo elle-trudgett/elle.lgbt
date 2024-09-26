@@ -1,7 +1,7 @@
 ---
 title: elle.lgbt
 subtitle: an internet space for **me**
-author: Elle Trudgett
+author: elle trudgett
 date: ;modified_date;
 lang: en
 toc: false

@@ -303,19 +303,27 @@ input, button, textarea {
     calc(var(--line-height) / 2 - var(--border-thickness))
     calc(1ch - var(--border-thickness));
   margin: 0;
+  margin-left: 4%;
   margin-bottom: 1rem;
   font: inherit;
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: inherit;
   height: calc(var(--line-height) * 4);
-  width: 100%;
+  width: 44%;
   overflow: visible;
   background: var(--background-color);
-  color: var(--text-color);
+  color: var(--link-color);
+  text-decoration: underline;
   line-height: normal;
   -webkit-font-smoothing: inherit;
   -moz-osx-font-smoothing: inherit;
   -webkit-appearance: none;
+  text-wrap: nowrap;
+}
+
+button.back {
+  width: 30%;
+  min-width: 10rem;
 }
 
 input[type=checkbox] {

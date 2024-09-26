@@ -1,13 +1,11 @@
 ---
-title: elle.lgbt
+title: error
 subtitle: you took a wrong **turn** somewhere...
-author: Elle Trudgett
+author: elle trudgett
 date: ;modified_date;
 lang: en
 toc: false
 main: true
 ---
-
-# Error
 
 you're drunk; go [home](/).

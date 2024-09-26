@@ -5,10 +5,10 @@
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
 $for(author-meta)$
-  <meta name="author" content="$author-meta$" />
+  <meta name="author" content="elle trudgett" />
 $endfor$
 $if(date-meta)$
-  <meta name="dcterms.date" content="$date-meta$" />
+  <meta name="dcterms.date" content="$date$" />
 $endif$
 $if(keywords)$
   <meta name="keywords" content="$for(keywords)$$keywords$$sep$, $endfor$" />
@@ -40,10 +40,8 @@ $endfor$
     <td style="display: none;"></td>
   </tr>
   <tr>
-    <th class="width-min">Author</th>
-    <td class="width-auto"><cite>$author$</cite></td>
-    <th class="width-min">Updated</th>
-    <td class="width-min"><time style="white-space: pre;">$date$</time></td>
+    <td colspan="2" style="border: none;"></td>
+    <th class="width-min" style="border: none;">updated:&nbsp;<time style="white-space: pre;">$date$</time></th>
   </tr>
 </table>
 $if(abstract)$
@@ -54,9 +52,7 @@ $abstract$
 $endif$
 $if(main)$
 $else$
-<button>
-<a href="/index.html">← Back to main page</a>
-</button>
+<a href="/index.html"><button class="back">← back</button></a>
 $endif$
 $if(toc)$
 <nav id="$idprefix$TOC" role="doc-toc">

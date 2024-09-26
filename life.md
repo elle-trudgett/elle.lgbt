@@ -1,17 +1,9 @@
 ---
-title: elle.lgbt
-subtitle: story of my **life**
-author: Elle Trudgett
+title: life
+subtitle: it **me**
+author: elle trudgett
 date: ;modified_date;
 lang: en
 toc: true
 toc-title: Contents
 ---
-
-# Life
-
-## one
-
-## two
-
-## three
