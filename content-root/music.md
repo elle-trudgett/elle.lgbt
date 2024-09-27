@@ -1,6 +1,6 @@
 ---
 title: music
-subtitle: '**listen**,...'
+subtitle: 'hey, **listen**!'
 author: elle trudgett
 date: ;modified_date;
 lang: en

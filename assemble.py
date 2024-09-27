@@ -10,7 +10,7 @@ def get_modified_date(file_path):
 
 
 def assemble():
-    for fn in glob.glob("*.html"):
+    for fn in glob.glob("deploy/*.html"):
         with open(fn, "r") as f:
             lines = f.readlines()
 
