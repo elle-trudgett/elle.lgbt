@@ -10,10 +10,13 @@
   --accent-color: #e150a1;
   --background-color: #f5f3f0;
   --background-color-alt: #f2f1ea;
+  --input-bg: #f9f9e5;
 
   --font-weight-normal: 500;
   --font-weight-medium: 600;
   --font-weight-bold: 800;
+
+  --key-image: url('img/key-light.svg');
 
   font-family: var(--font-family);
   font-optical-sizing: auto;
@@ -31,6 +34,9 @@
     --accent-color: #ee54aa;
     --background-color: #2e2e2b;
     --background-color-alt: #30302e;
+    --input-bg: #101010;
+
+    --key-image: url('img/key-dark.svg');
   }
 }
 
@@ -321,6 +327,26 @@ input, button, textarea {
   text-wrap: nowrap;
 }
 
+input#key {
+  font-size: 2.5rem;
+  text-align: center;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--accent-color);
+}
+
+button.key {
+  background-image: var(--key-image);
+  background-size: 30%;
+  background-repeat: no-repeat;
+  background-position: center;
+  padding-left: 2ch;
+}
+
+button.big {
+  width: 92%
+}
+
 button.back {
   width: 30%;
   min-width: 10rem;
@@ -347,7 +373,8 @@ button:focus, input:focus {
 }
 
 input {
-  width: calc(round(down, 100%, 1ch));
+  width: 92%;
+  background-color: var(--input-bg);
 }
 ::placeholder {
   color: var(--text-color-alt);
@@ -368,7 +395,7 @@ button {
 }
 
 button:hover {
-  background: var(--background-color-alt);
+  background-color: var(--background-color-alt);
 }
 button:active {
   transform: translate(2px, 2px);

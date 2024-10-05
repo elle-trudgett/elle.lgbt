@@ -112,9 +112,26 @@ function checkOffsets() {
   }
 }
 
-const debugToggle = document.querySelector(".debug-toggle");
-function onDebugToggle() {
-  document.body.classList.toggle("debug", debugToggle.checked);
+
+function hashFunc(s) {
+    /* Simple hash function. */
+    let a = 1, c = 0, h, o;
+    if (s) {
+        a = 0;
+        /*jshint plusplus:false bitwise:false*/
+        for (h = s.length - 1; h >= 0; h--) {
+            o = s.charCodeAt(h);
+            a = (a<<6&268435455) + o + (o<<14);
+            c = a & 266338304;
+            a = c!==0?a^c>>21:a;
+        }
+    }
+    return String(a);
 }
-debugToggle.addEventListener("change", onDebugToggle);
-onDebugToggle();
+
+function unlock() {
+  const key = "password." + document.getElementById('key').value;
+  const key2 = "extra.longer.password." + document.getElementById('key').value;
+  // navigate to that url
+  window.location.href = "/" + hashFunc(key) + "_" + hashFunc(key2) + "/index.html";
+}

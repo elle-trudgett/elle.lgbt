@@ -1,6 +1,8 @@
 import datetime
 import glob
 import os
+from pathlib import Path
+
 
 
 def get_modified_date(file_path):
@@ -10,7 +12,9 @@ def get_modified_date(file_path):
 
 
 def assemble():
-    for fn in glob.glob("deploy/*.html"):
+    path = Path(r"deploy")
+
+    for fn in path.glob("**/*.html"):
         with open(fn, "r") as f:
             lines = f.readlines()
 
@@ -23,6 +27,8 @@ def assemble():
 
         with open(fn, "w") as f:
             f.writelines(lines)
+
+        print(f"Assembled {fn} with modified date {m_date}")
 
 
 def main():

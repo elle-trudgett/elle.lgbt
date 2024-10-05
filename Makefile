@@ -1,5 +1,5 @@
-# Find all Markdown files in the content-root directory
-MD_FILES := $(wildcard content-root/*.md)
+# Find all Markdown files in the content-root directory and its subdirectories
+MD_FILES := $(shell find content-root -name '*.md')
 
 # Create a list of target HTML files in the deploy folder
 HTML_FILES := $(patsubst content-root/%.md,deploy/%.html,$(MD_FILES))
@@ -10,11 +10,11 @@ all: $(HTML_FILES)
 
 # Rule to build HTML files from Markdown
 deploy/%.html: content-root/%.md deploy/index.css template.html Makefile
-	mkdir -p deploy
-	pandoc --toc -s --css reset.css --css index.css -i $< -o $@ --template=template.html
+	@mkdir -p $(@D)
+	pandoc --toc -s --css '/reset.css' --css '/index.css' -i $< -o $@ --template=template.html
 
 # Clean target
 clean:
-	rm -f $(HTML_FILES)
+	rm -rf deploy
 
 .PHONY: all clean

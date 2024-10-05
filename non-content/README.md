@@ -8,7 +8,7 @@ https://owickstrom.github.io/the-monospace-web/
 
 ```
 nix develop # or `direnv allow .`
-make
+TMPDIR=/tmp make -B
 ```
 
 ## License
