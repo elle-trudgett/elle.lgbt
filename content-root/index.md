@@ -8,9 +8,11 @@ toc: false
 main: true
 ---
 
-# welcome 🏳️‍⚧️
+# welcome
 
 hi, i'm **elle**. what would you like to know about me?
+
+this website is very much a work in progress, hehe
 
 <hr/>
 
