@@ -1,4 +1,4 @@
-name: Deploy Changed Files to S3
+name: Deploy to S3
 
 on:
   push:
@@ -10,8 +10,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0  # This fetches all history for all branches and tags
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -20,44 +18,22 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-west-1
 
-      - name: Deploy changed files to S3
+      - name: Deploy to S3
         run: |
-          # Get the list of changed files in the deploy directory
-          CHANGED_FILES=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep '^deploy/')
-
-          # Function to upload a file without extension
-          upload_without_extension() {
-            local file="$1"
-            local filename=$(basename "$file" .html)
-            local relative_path=$(dirname "${file#deploy/}")
+          # Upload HTML files without extension from deploy/ directory
+          find deploy/ -name "*.html" -type f | while read file; do
+            filename=$(basename "$file" .html)
+            relative_path=$(dirname "${file#deploy/}")
             if [ "$relative_path" = "." ]; then
               aws s3 cp "$file" "s3://elle.lgbt/$filename" --content-type "text/html" --content-disposition "inline"
             else
               aws s3 cp "$file" "s3://elle.lgbt/$relative_path/$filename" --content-type "text/html" --content-disposition "inline"
             fi
-          }
-
-          # Process changed files
-          echo "$CHANGED_FILES" | while read -r file; do
-            if [[ $file == *.html ]]; then
-              upload_without_extension "$file"
-            elif [[ $file == *.css ]]; then
-              aws s3 cp "$file" "s3://elle.lgbt/${file#deploy/}" --content-type "text/css"
-            elif [[ $file == *.js ]]; then
-              aws s3 cp "$file" "s3://elle.lgbt/${file#deploy/}" --content-type "application/javascript"
-            elif [[ $file == *.svg ]]; then
-              aws s3 cp "$file" "s3://elle.lgbt/${file#deploy/}" --content-type "image/svg+xml"
-            else
-              aws s3 cp "$file" "s3://elle.lgbt/${file#deploy/}"
-            fi
           done
 
-          # Handle deletions
-          DELETED_FILES=$(git diff --diff-filter=D --name-only ${{ github.event.before }} ${{ github.sha }} | grep '^deploy/')
-          echo "$DELETED_FILES" | while read -r file; do
-            aws s3 rm "s3://elle.lgbt/${file#deploy/}"
-            # If it's an HTML file, also remove the version without .html extension
-            if [[ $file == *.html ]]; then
-              aws s3 rm "s3://elle.lgbt/${file#deploy/.html}"
-            fi
-          done
+          # Upload allowlisted file types from deploy/ directory
+          aws s3 sync deploy/ s3://elle.lgbt --delete --exclude "*" --include "*.css" --include "*.js" --include "*.svg"
+
+          # Set correct content-type headers for CSS and JS files
+          aws s3 cp s3://elle.lgbt s3://elle.lgbt --recursive --exclude "*" --include "*.css" --content-type "text/css"
+          aws s3 cp s3://elle.lgbt s3://elle.lgbt --recursive --exclude "*" --include "*.js" --content-type "application/javascript"
