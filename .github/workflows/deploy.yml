@@ -20,20 +20,28 @@ jobs:
 
       - name: Deploy to S3
         run: |
-          # Upload HTML files without extension from deploy/ directory
-          find deploy/ -name "*.html" -type f | while read file; do
-            filename=$(basename "$file" .html)
-            relative_path=$(dirname "${file#deploy/}")
-            if [ "$relative_path" = "." ]; then
-              aws s3 cp "$file" "s3://elle.lgbt/$filename" --content-type "text/html" --content-disposition "inline"
-            else
-              aws s3 cp "$file" "s3://elle.lgbt/$relative_path/$filename" --content-type "text/html" --content-disposition "inline"
+          # Sync all files, setting appropriate content types
+          aws s3 sync deploy/ s3://elle.lgbt \
+            --delete \
+            --exclude "*" \
+            --include "*.html" \
+            --include "*.css" \
+            --include "*.js" \
+            --include "*.svg" \
+            --content-type "text/html" \
+            --content-type "text/css:*.css" \
+            --content-type "application/javascript:*.js" \
+            --content-type "image/svg+xml:*.svg" \
+            --content-disposition "inline"
+
+          # Remove .html extensions from HTML files in S3
+          aws s3 ls s3://elle.lgbt --recursive | grep '\.html$' | awk '{print $4}' | while read -r key; do
+            newkey="${key%.html}"
+            if [ "$key" != "$newkey" ]; then
+              aws s3 cp "s3://elle.lgbt/$key" "s3://elle.lgbt/$newkey" \
+                --content-type "text/html" \
+                --content-disposition "inline" \
+                --metadata-directive REPLACE
+              aws s3 rm "s3://elle.lgbt/$key"
             fi
           done
-
-          # Upload allowlisted file types from deploy/ directory
-          aws s3 sync deploy/ s3://elle.lgbt --delete --exclude "*" --include "*.css" --include "*.js" --include "*.svg"
-
-          # Set correct content-type headers for CSS and JS files
-          aws s3 cp s3://elle.lgbt s3://elle.lgbt --recursive --exclude "*" --include "*.css" --content-type "text/css"
-          aws s3 cp s3://elle.lgbt s3://elle.lgbt --recursive --exclude "*" --include "*.js" --content-type "application/javascript"
