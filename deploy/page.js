@@ -133,5 +133,5 @@ function unlock() {
   const key = "password." + document.getElementById('key').value;
   const key2 = "extra.longer.password." + document.getElementById('key').value;
   // navigate to that url
-  window.location.href = "/" + hashFunc(key) + "_" + hashFunc(key2) + "/index.html";
+  window.location.href = "/" + hashFunc(key) + "_" + hashFunc(key2) + "/landing";
 }
