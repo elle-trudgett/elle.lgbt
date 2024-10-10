@@ -15,8 +15,11 @@ def assemble():
     path = Path(r"deploy")
 
     for fn in path.glob("**/*.html"):
-        with open(str(fn) + ".old", "r") as f:
-            old_lines = f.readlines()
+        old_fn = str(fn) + ".old"
+        old_lines = []
+        if os.path.exists(old_fn):
+            with open(old_fn, "r") as f:
+                old_lines = f.readlines()
         with open(fn, "r") as f:
             new_pandoc_lines = f.readlines()
 
