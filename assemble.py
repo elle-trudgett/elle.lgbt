@@ -20,6 +20,10 @@ def assemble():
         if os.path.exists(old_fn):
             with open(old_fn, "r") as f:
                 old_lines = f.readlines()
+            for line in old_lines:
+                if ";modified_date;" in line:
+                    old_lines = []
+                    break
         with open(fn, "r") as f:
             new_pandoc_lines = f.readlines()
 
