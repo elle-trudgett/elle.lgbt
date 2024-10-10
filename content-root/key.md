@@ -7,7 +7,7 @@ lang: en
 toc: false
 ---
 
-have a key? enter it here:
+have a password? enter it here:
 
-<input type="text" name="key" id="key" required>
+<input type="text" name="key" id="key" required autofocus>
 [<button class="big">unlock</button>](javascript:unlock())

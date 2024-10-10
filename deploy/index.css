@@ -9,7 +9,7 @@
   --link-color: #66645a;
   --accent-color: #e150a1;
   --background-color: #f5f3f0;
-  --background-color-alt: #f2f1ea;
+  --background-color-alt: #d7cdb9;
   --input-bg: #f9f9e5;
 
   --font-weight-normal: 500;
@@ -33,7 +33,7 @@
     --link-color: #b8b6aa;
     --accent-color: #ee54aa;
     --background-color: #2e2e2b;
-    --background-color-alt: #30302e;
+    --background-color-alt: #44423d;
     --input-bg: #101010;
 
     --key-image: url('img/key-dark.svg');
@@ -89,11 +89,9 @@ h1 {
   font-size: 2rem;
   line-height: calc(2 * var(--line-height));
   margin-bottom: calc(var(--line-height) * 2);
-  text-transform: uppercase;
 }
 h2 {
   font-size: 1rem;
-  text-transform: uppercase;
 }
 
 hr {
@@ -117,6 +115,11 @@ hr:after {
 
 a {
   text-decoration-thickness: var(--border-thickness);
+}
+
+a button {
+  text-decoration: none;
+  color: var(--accent-color);
 }
 
 a:link, a:visited {
@@ -303,6 +306,10 @@ li::marker {
     height: var(--line-height);
 }
 
+button {
+  box-shadow: 4px 4px 8px rgba(0.1,0.1,0.1,0.4);
+}
+
 input, button, textarea {
   border: var(--border-thickness) solid var(--text-color);
   padding: 
@@ -330,7 +337,6 @@ input, button, textarea {
 input#key {
   font-size: 2.5rem;
   text-align: center;
-  text-transform: uppercase;
   text-decoration: none;
   color: var(--accent-color);
 }
@@ -389,7 +395,6 @@ button::-moz-focus-inner {
 }
 
 button {
-  text-transform: uppercase;
   font-weight: var(--font-weight-medium);
   cursor: pointer;
 }
@@ -496,4 +501,11 @@ label input {
 
 .debug-toggle-label {
   text-align: right;
+}
+
+.profile-pic {
+  float: right;
+  max-width: 240px;
+  width: 14em;
+  padding-left: 3em;
 }

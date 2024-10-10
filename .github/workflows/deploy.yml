@@ -32,7 +32,7 @@ jobs:
           done
 
           # Upload allowlisted file types from deploy/ directory
-          aws s3 sync deploy/ s3://elle.lgbt --delete --exclude "*" --include "*.css" --include "*.js" --include "*.svg"
+          aws s3 sync deploy/ s3://elle.lgbt --delete --exclude "*" --include "*.css" --include "*.js" --include "*.svg" --include "*.webp"
 
           # Set correct content-type headers for CSS and JS files
           aws s3 cp s3://elle.lgbt s3://elle.lgbt --recursive --exclude "*" --include "*.css" --content-type "text/css"
