@@ -22,7 +22,7 @@ if you have a password (if i gave you a card, it's on the back) click the **key*
 
 <hr/>
 
-[<button>blog 🚧</button>](/blog)[<button>photos 🚧</button>](/photos)[<button>life 🚧</button>](/life)[<button>work 🚧</button>](/work)[<button>art 🚧</button>](/art)[<button>music 🚧</button>](/music)[<button>writing 🚧</button>](/writing)[<button>philosophy 🚧</button>](/philosophy)[<button>games 🚧</button>](/games)[<button>contact 🚧</button>](/contact)
+[<button>blog 🚧</button>](/blog)[<button>photos 🚧</button>](/photos)[<button>life 🚧</button>](/life)[<button>work</button>](/work)[<button>art 🚧</button>](/art)[<button>music 🚧</button>](/music)[<button>writing 🚧</button>](/writing)[<button>philosophy 🚧</button>](/philosophy)[<button>games 🚧</button>](/games)[<button>contact 🚧</button>](/contact)
 [<button class="big key"></button>](/key)
 
 <hr/>

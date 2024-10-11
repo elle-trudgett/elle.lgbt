@@ -509,3 +509,9 @@ label input {
   width: 14em;
   padding-left: 3em;
 }
+
+.small-icon {
+  width: 2em;
+  display: inline-block;
+  vertical-align: middle;
+}
